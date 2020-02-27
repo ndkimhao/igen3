@@ -1,9 +1,12 @@
 #include <iostream>
 #include <array>
 #include <vector>
+#include <random>
+
 #include <cxxopts.hpp>
 #include <klog.h>
 #include <reproc++/run.hpp>
+#include <dynamic_bitset.hpp>
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -35,5 +38,21 @@ int main(int argc, char *argv[]) {
         LOG(INFO, "OUTPUT === {} ===", ec.message());
     }
 
+    {
+        dynamic_bitset<> bitset1(12, 0b0100010110111);
+        std::cout << "bitset1     = " << bitset1 << std::endl;
+
+        // random bitset
+        std::minstd_rand rand(std::random_device{}());
+        std::bernoulli_distribution dist;
+        dynamic_bitset<> bitset2;
+        for(size_t i = 0; i < 12; ++i)
+        {
+            bitset2.push_back(dist(rand));
+        }
+        std::cout << "bitset2     = " << bitset2 << std::endl;
+
+        std::cout << "common bits = " << (bitset1 & bitset2) << std::endl;
+    }
     return 0;
 }
