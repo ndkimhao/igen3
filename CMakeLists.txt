@@ -16,6 +16,10 @@ target_include_directories(igen3
 add_subdirectory(lib/fmt)
 target_link_libraries(igen3 fmt)
 
+set(REPROCXX ON)
+add_subdirectory(lib/reproc)
+target_link_libraries(igen3 reprocxx)
+
 # KCommon
 target_include_directories(igen3
         PRIVATE

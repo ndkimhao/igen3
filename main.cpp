@@ -1,6 +1,9 @@
 #include <iostream>
+#include <array>
+#include <vector>
 #include <cxxopts.hpp>
 #include <klog.h>
+#include <reproc++/run.hpp>
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -17,5 +20,20 @@ int main(int argc, char *argv[]) {
     auto dom = result["dom"].as<std::string>();
 
     std::cout << "dom =   " << dom;
+
+    int status = -1;
+    std::error_code ec;
+
+    reproc::options opt;
+    opt.redirect.parent = true;
+    opt.deadline = reproc::milliseconds(5000);
+
+    const std::vector<std::string> procs = {"1/ex.exe", "1", "1", "1", "1", "1", "1"};
+    std::tie(status, ec) = reproc::run(procs, opt);
+
+    if (ec) {
+        LOG(INFO, "OUTPUT === {} ===", ec.message());
+    }
+
     return 0;
 }
