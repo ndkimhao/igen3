@@ -3,7 +3,7 @@
 #include <vector>
 #include <random>
 
-#include <cxxopts.hpp>
+#include <misc/cxxopts.hpp>
 #include <klog.h>
 #include <reproc++/run.hpp>
 #include <dynamic_bitset.hpp>
@@ -54,5 +54,7 @@ int main(int argc, char *argv[]) {
 
         std::cout << "common bits = " << (bitset1 & bitset2) << std::endl;
     }
+
+    std::cout << sizeof(std::string);
     return 0;
 }

@@ -5,7 +5,7 @@
 #ifndef IGEN3_KLOG_H
 #define IGEN3_KLOG_H
 
-#include <easylogging++.h>
+#include <misc/easylogging++.h>
 #include <fmt/format.h>
 
 #define LOG(level, f, ...) ELPP_LOG(level) << fmt::format(f, ##__VA_ARGS__)

@@ -29,7 +29,7 @@ option(DYNAMICBITSET_HEADERS_TARGET_IDE "Enable generating a target with headers
 add_library(dynamic_bitset INTERFACE)
 add_library(dynamic_bitset::dynamic_bitset ALIAS dynamic_bitset)
 
-# If used via add_subdirectory, disable warnings on headers
+# If used via add_subdirectory, disable warnings on misc
 set(MAYBE_SYSTEM)
 if(NOT DYNAMICBITSET_MASTER_PROJECT)
 	set(MAYBE_SYSTEM SYSTEM)

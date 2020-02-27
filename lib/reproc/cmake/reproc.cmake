@@ -82,7 +82,7 @@ function(reproc_add_common TARGET LANGUAGE)
     target_compile_features(${TARGET} PUBLIC c_std_99)
   else()
     # clang-tidy uses the MSVC standard library instead of MinGW's standard
-    # library so we have to use C++14 (because MSVC headers use C++14).
+    # library so we have to use C++14 (because MSVC misc use C++14).
     if(MINGW AND REPROC_TIDY)
       set(STANDARD 14)
     else()
@@ -228,8 +228,8 @@ function(reproc_add_library TARGET LANGUAGE)
     SOVERSION ${PROJECT_VERSION_MAJOR}
   )
 
-  # Only use the headers from the repository when building. When installing we
-  # want to use the install location of the headers (e.g. /usr/include) as the
+  # Only use the misc from the repository when building. When installing we
+  # want to use the install location of the misc (e.g. /usr/include) as the
   # include directory instead.
   target_include_directories(${TARGET} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

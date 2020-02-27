@@ -7,12 +7,12 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(igen3
         main.cpp
-        Executor.cpp Executor.h)
+        Executor.cpp Executor.h lib/kcommon/ktypes.h)
 
 # === Third party ======================================
 target_sources(igen3
         PRIVATE
-        lib/easylogging++.h lib/easylogging++.cc)
+        lib/misc/easylogging++.h lib/misc/easylogging++.cc)
 target_include_directories(igen3
         PRIVATE
         lib/)
@@ -26,6 +26,9 @@ target_link_libraries(igen3 PRIVATE reprocxx)
 
 add_subdirectory(lib/dynamic_bitset)
 target_link_libraries(igen3 PRIVATE dynamic_bitset)
+
+add_subdirectory(lib/hopscotch-map)
+target_link_libraries(igen3 PRIVATE tsl::hopscotch_map)
 # === KCommon ==========================================
 target_include_directories(igen3
         PRIVATE
