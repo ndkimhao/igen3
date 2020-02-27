@@ -4,6 +4,8 @@
 
 #include "SimpleRunner.h"
 
+#include <sstream>
+
 #include <reproc++/reproc.hpp>
 #include <reproc++/sink.hpp>
 

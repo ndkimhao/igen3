@@ -3,16 +3,14 @@
 #include <vector>
 #include <random>
 
-#include <misc/cxxopts.hpp>
+#include <cxxopts.hpp>
 #include <klog.h>
 
 #include "igen/IgenOpts.h"
 #include "igen/Igen.h"
 
-INITIALIZE_EASYLOGGINGPP
-
 void run_interative(const cxxopts::ParseResult arg) {
-    LOG(INFO, "Run iterative algorithm");
+    LOG(INFO) << "Run iterative algorithm";
 
     std::string dom = arg["dom"].asString();
     uint64_t seed = arg["seed"].as<uint64_t>();
@@ -21,17 +19,27 @@ void run_interative(const cxxopts::ParseResult arg) {
 
     auto opts = std::make_shared<igen::IgenOpts>(dom, seed, runner, target);
     auto igen = std::make_shared<igen::Igen>(opts);
+    igen->init();
 
-    LOG(INFO, "Opts: dom={}, seed={}, runner={}, target={}", dom, seed, runner, target);
+    FLOG(INFO, "Opts: dom={}, seed={}, runner={}, target={}", dom, seed, runner, target);
     for (bool cont = true; cont;) {
         cont = igen->runOnce();
     }
 }
 
+void initGlog(int argc, char *argv[]) {
+    FLAGS_colorlogtostderr = true;
+    FLAGS_timestamp_in_logfile_name = false;
+    FLAGS_max_log_size = 2;
+    google::SetStderrLogging(0);
+    for (int i = 0; i < google::NUM_SEVERITIES; ++i) {
+        google::SetLogDestination(i, "app.log");
+    }
+    google::InitGoogleLogging(argv[0]);
+}
+
 int main(int argc, char *argv[]) {
-    START_EASYLOGGINGPP(argc, argv);
-    el::Configurations conf("logging.conf");
-    el::Loggers::reconfigureAllLoggers(conf);
+    initGlog(argc, argv);
 
     cxxopts::Options cxxopts("igen3", "Dynamic Interaction Inference for Configurable Software");
     cxxopts.add_options()

@@ -4,6 +4,8 @@
 
 #include "Runner.h"
 
+#include <klog.h>
+
 #include "igen/IgenOpts.h"
 #include "runner/SimpleRunner.h"
 
@@ -32,10 +34,10 @@ void Runner::run(const std::vector<arg_t> &args, dynamic_bitset<> &locs) {
         strArgs[i] = valMap[v];
     }
     locs.reset();
-    LOG(VERBOSE, "Run target with args: {}", fmt::join(args, " "));
+    FVLOG(10, "Run target with args: {}", fmt::join(args, " "));
     int status = v_execute(strArgs, locs);
     if (status != 0) {
-        LOG(FATAL, "Program return status code {}", status);
+        FLOG(FATAL, "Program return status code {}", status);
     }
 //    locs.shrink_to_fit();
 }

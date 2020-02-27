@@ -10,7 +10,6 @@
 #include <ktypes.h>
 #include <tsl/hopscotch_map.h>
 #include <dynamic_bitset.hpp>
-#include <klog.h>
 
 #include "igen/IgenOpts.h"
 #include "igen/Domain.h"
