@@ -23,6 +23,11 @@ void run_interative(const cxxopts::ParseResult arg) {
 
     auto opts = std::make_shared<igen::IgenOpts>(dom, seed, runner, target);
     auto igen = std::make_shared<igen::Igen>(opts);
+
+    LOG(INFO, "Opts: dom={}, seed={}, runner={}, target={}", dom, seed, runner, target);
+    for (bool cont = true; cont;) {
+        cont = igen->runOnce();
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -34,7 +39,7 @@ int main(int argc, char *argv[]) {
     cxxopts.add_options()
             ("d,dom", "Input domain file", cxxopts::value<std::string>())
             ("s,seed", "Random seed", cxxopts::value<uint64_t>())
-            ("e,runner", "Executor: s/simple", cxxopts::value<uint64_t>())
+            ("r,runner", "Executor: s/simple", cxxopts::value<std::string>())
             ("t,target", "Executable target", cxxopts::value<std::string>())
             ("i,iterative", "Run the iterative algorithm")
             ("h,help", "Print usage");

@@ -7,3 +7,7 @@
 #include <utility>
 
 igen::Igen::Igen(std::shared_ptr<IgenOpts> opts) : opts(std::move(opts)) {}
+
+bool igen::Igen::runOnce() {
+    return false;
+}

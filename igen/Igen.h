@@ -16,6 +16,8 @@ class Igen {
 public:
     Igen(std::shared_ptr<IgenOpts> opts);
 
+    bool runOnce();
+
 private:
     std::shared_ptr<IgenOpts> opts;
 };

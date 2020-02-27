@@ -13,14 +13,22 @@ namespace igen {
 
 class DomainFile {
 public:
+    struct VarEntry {
+        std::string name;
+        std::vector<std::string> values;
+    };
+
+public:
     DomainFile() = default;
 
-    DomainFile(const std::string &path);
+    explicit DomainFile(const std::string &path);
 
     void parse(const std::string &path);
 
+    [[nodiscard]] const std::vector<VarEntry> &getVars() const;
+
 private:
-    std::vector<std::pair<std::string, std::vector<std::string>>> rep_;
+    std::vector<VarEntry> vars_;
 };
 
 
