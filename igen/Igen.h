@@ -8,6 +8,8 @@
 #include <memory>
 
 #include "IgenOpts.h"
+#include "Domain.h"
+#include "runner/Runner.h"
 
 namespace igen {
 
@@ -16,10 +18,14 @@ class Igen {
 public:
     Igen(std::shared_ptr<IgenOpts> opts);
 
+    void init();
+
     bool runOnce();
 
 private:
-    std::shared_ptr<IgenOpts> opts;
+    std::shared_ptr<IgenOpts> opts_;
+    std::shared_ptr<Domain> dom_;
+    std::shared_ptr<Runner> runner_;
 };
 
 

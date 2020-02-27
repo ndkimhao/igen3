@@ -10,7 +10,11 @@
 namespace igen {
 
 class SimpleRunner : public Runner {
+public:
+    SimpleRunner(std::shared_ptr<IgenOpts> opts);
 
+protected:
+    int v_execute(const std::vector<std::string> &args, dynamic_bitset<> &locs) override;
 };
 
 }

@@ -2,7 +2,7 @@
 // Created by KH on 2/26/2020.
 //
 
-#include "DomainFile.h"
+#include "Domain.h"
 
 #include <fstream>
 #include <sstream>
@@ -10,11 +10,11 @@
 namespace igen {
 
 
-DomainFile::DomainFile(const std::string &path) {
+Domain::Domain(const std::string &path) {
     parse(path);
 }
 
-void DomainFile::parse(const std::string &path) {
+void Domain::parse(const std::string &path) {
     std::ifstream ifs(path);
     std::string line;
     while (std::getline(ifs, line)) {
@@ -32,7 +32,7 @@ void DomainFile::parse(const std::string &path) {
     }
 }
 
-const std::vector<DomainFile::VarEntry> &DomainFile::getVars() const {
+const std::vector<Domain::VarEntry> &Domain::vars() const {
     return vars_;
 }
 
