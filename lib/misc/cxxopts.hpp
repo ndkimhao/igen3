@@ -1118,6 +1118,12 @@ namespace cxxopts
 #endif
     }
 
+#define __CXXOPTS_CONV_FUNC(T, name) const T& name() const { return as<T>(); }
+    __CXXOPTS_CONV_FUNC(bool, asBool)
+    __CXXOPTS_CONV_FUNC(int, asInt)
+    __CXXOPTS_CONV_FUNC(std::string, asString)
+#undef __CXXOPTS_CONV_FUNC
+
     private:
     void
     ensure_value(std::shared_ptr<const OptionDetails> details)
