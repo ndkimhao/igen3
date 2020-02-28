@@ -23,17 +23,21 @@ set(REPROCXX ON)
 add_subdirectory(lib/reproc)
 target_link_libraries(igen3 PRIVATE reprocxx)
 
-add_subdirectory(lib/dynamic_bitset)
-target_link_libraries(igen3 PRIVATE dynamic_bitset::dynamic_bitset)
-
-add_subdirectory(lib/hopscotch-map)
-target_link_libraries(igen3 PRIVATE tsl::hopscotch_map)
+#add_subdirectory(lib/dynamic_bitset)
+#target_link_libraries(igen3 PRIVATE dynamic_bitset::dynamic_bitset)
+#
+#add_subdirectory(lib/hopscotch-map)
+#target_link_libraries(igen3 PRIVATE tsl::hopscotch_map)
 
 add_subdirectory(lib/glog)
 target_link_libraries(igen3 PRIVATE glog::glog)
 
 add_subdirectory(lib/effolkronium_random)
 target_link_libraries(igen3 PRIVATE effolkronium_random)
+
+set(FETCHCONTENT_SOURCE_DIR_BOOST boost-src)
+add_subdirectory(lib/boost-cmake)
+target_link_libraries(igen3 PUBLIC Boost::boost)
 # === KCommon ==========================================
 target_include_directories(igen3
         PRIVATE
