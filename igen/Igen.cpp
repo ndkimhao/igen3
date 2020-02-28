@@ -12,7 +12,9 @@ namespace igen {
 Igen::Igen(std::shared_ptr<IgenOpts> opts) : opts_(std::move(opts)) {}
 
 bool Igen::run() {
-    FLOG(INFO, "Run, Opts: dom={}, seed={}, runner={}, target={}", dom_, opts_->getSeed(), runner_, opts_->getTarget());
+    FLOG(INFO, "Run, Opts: dom={}, seed={}, runner={}, target={}", opts_->getDomInp(), opts_->getSeed(), runner_,
+         opts_->getTarget());
+    FLOG(INFO, "Domain: {}", Domain(*dom_));
     Rand.seed(opts_->getSeed());
 
     vec<VecArgs> configs = dom_->genOneCoveringConfigs();

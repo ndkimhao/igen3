@@ -21,16 +21,18 @@ void Domain::parse(const std::string &path) {
     std::string line;
     while (std::getline(ifs, line)) {
         std::stringstream ss(line);
-        VarEntry entry;
-        ss >> entry.name;
-        if (entry.name.empty() || entry.name[0] == '#') continue;
+        str name;
+        vec<str> labels;
+
+        ss >> name;
+        if (name.empty() || name[0] == '#') continue;
 
         std::string val;
         while (ss >> val) {
             if (val.empty() || val[0] == '#') break;
-            entry.lables.push_back(std::move(val));
+            labels.push_back(std::move(val));
         }
-        vars_.push_back(entry);
+        vars_.emplace_back(move(name), move(labels));
     }
 }
 
@@ -67,7 +69,7 @@ str Domain::to_str(const VecArgs &args) const {
     CHECK(args.size() == n_vars());
     std::stringstream ss;
     for (int i = 0; i < args.size(); i++) {
-        ss << vars()[i].name << ' ' << vars()[i].lables.at(args[i]) << ", ";
+        ss << vars()[i].name() << ' ' << vars()[i].labels()[args[i]] << ", ";
     }
     return ss.str();
 }

@@ -26,9 +26,9 @@ set<loc_t> Runner::run(const std::vector<arg_t> &args) {
     strArgs[0] = opts_->getTarget();
     for (int i = 0; i < args.size(); i++) {
         arg_t v = args[i];
-        const auto &valMap = dom_->vars()[i].lables;
-        DCHECK(0 <= v && v < valMap.size());
-        strArgs[i + 1] = valMap[v];
+        const auto &labels = dom_->vars()[i].labels();
+        DCHECK(0 <= v && v < labels.size());
+        strArgs[i + 1] = labels[v];
     }
     FVLOG(10, "Run target with args: {} {}", opts_->getTarget(), dom_->to_str(args));
     auto ret = v_execute(strArgs);
