@@ -20,11 +20,17 @@ public:
 
     void init();
 
-    bool runOnce();
+    bool run();
 
 private:
     std::shared_ptr<IgenOpts> opts_;
     std::shared_ptr<Domain> dom_;
+public:
+    const std::shared_ptr<Domain> &getDom() const {
+        return dom_;
+    };
+
+private:
     std::shared_ptr<Runner> runner_;
 };
 

@@ -7,9 +7,8 @@
 
 #include <vector>
 
-#include <ktypes.h>
+#include <kcommon.h>
 #include <tsl/hopscotch_map.h>
-#include <dynamic_bitset.hpp>
 
 #include "igen/IgenOpts.h"
 #include "igen/Domain.h"
@@ -19,7 +18,7 @@ namespace igen {
 
 class Runner {
 public:
-    void run(const std::vector<arg_t> &args, dynamic_bitset<> &locs);
+    set<loc_t> run(const std::vector<arg_t> &args);
 
     void init(std::shared_ptr<Domain> dom);
 
@@ -29,14 +28,19 @@ public:
     static std::unique_ptr<Runner> create(std::string type, std::shared_ptr<IgenOpts> opts);
 
 protected:
-    virtual int v_execute(const std::vector<std::string> &args, dynamic_bitset<> &locs) = 0;
+    virtual set<loc_t> v_execute(const std::vector<std::string> &args) = 0;
 
-    [[nodiscard]] loc_t getLocIdx(const std::string &s);
+    loc_t gen_loc_idx(const std::string &s);
+
+    str to_str(const vec<loc_t> &v);
+    str to_str(const set<loc_t> &v);
 
     Runner() = default;
 
     std::shared_ptr<IgenOpts> opts_;
     std::shared_ptr<Domain> dom_;
+
+    vec<str> mapLocIdxToStr;
     tsl::hopscotch_map<std::string, loc_t> mapLocStrToIdx_;
 };
 

@@ -14,7 +14,7 @@ public:
     SimpleRunner(std::shared_ptr<IgenOpts> opts);
 
 protected:
-    int v_execute(const std::vector<std::string> &args, dynamic_bitset<> &locs) override;
+    set<loc_t> v_execute(const std::vector<std::string> &args) override;
 };
 
 }

@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(igen3
         main.cpp
-        runner/Runner.cpp runner/Runner.h lib/kcommon/ktypes.h igen/Domain.cpp igen/Domain.h igen/IgenOpts.cpp igen/IgenOpts.h runner/SimpleRunner.cpp runner/SimpleRunner.h igen/Igen.cpp igen/Igen.h lib/kcommon/klog.h)
+        runner/Runner.cpp runner/Runner.h igen/Domain.cpp igen/Domain.h igen/IgenOpts.cpp igen/IgenOpts.h runner/SimpleRunner.cpp runner/SimpleRunner.h igen/Igen.cpp igen/Igen.h lib/kcommon/kcommon.h lib/kcommon/rand.cpp igen/RunAlgo.cpp igen/RunAlgo.h lib/kcommon/kvecutil.h lib/kcommon/kprettyprint.h)
 
 target_include_directories(igen3 PRIVATE /)
 
@@ -31,6 +31,9 @@ target_link_libraries(igen3 PRIVATE tsl::hopscotch_map)
 
 add_subdirectory(lib/glog)
 target_link_libraries(igen3 PRIVATE glog::glog)
+
+add_subdirectory(lib/effolkronium_random)
+target_link_libraries(igen3 PRIVATE effolkronium_random)
 # === KCommon ==========================================
 target_include_directories(igen3
         PRIVATE

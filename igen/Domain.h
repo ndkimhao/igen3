@@ -8,6 +8,8 @@
 #include <string>
 #include <vector>
 
+#include <kcommon.h>
+
 namespace igen {
 
 
@@ -15,7 +17,13 @@ class Domain {
 public:
     struct VarEntry {
         std::string name;
-        std::vector<std::string> values;
+        std::vector<std::string> lables;
+
+        VecArgs all_val_idx() const;
+
+        int n_possible_vals() const {
+            return lables.size();
+        }
     };
 
 public:
@@ -25,7 +33,21 @@ public:
 
     void parse(const std::string &path);
 
-    [[nodiscard]] const std::vector<VarEntry> &vars() const;
+    const std::vector<VarEntry> &vars() const {
+        return vars_;
+    };
+
+    const VarEntry &operator[](size_t i) const {
+        return vars_[i];
+    }
+
+    int n_vars() const {
+        return vars_.size();
+    }
+
+    vec<VecArgs> genOneCoveringConfigs() const;
+
+    str to_str(const VecArgs &args) const;
 
 private:
     std::vector<VarEntry> vars_;

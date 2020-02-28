@@ -4,28 +4,9 @@
 #include <random>
 
 #include <cxxopts.hpp>
-#include <klog.h>
+#include <kcommon.h>
 
-#include "igen/IgenOpts.h"
-#include "igen/Igen.h"
-
-void run_interative(const cxxopts::ParseResult arg) {
-    LOG(INFO) << "Run iterative algorithm";
-
-    std::string dom = arg["dom"].asString();
-    uint64_t seed = arg["seed"].as<uint64_t>();
-    std::string runner = arg["runner"].asString();
-    std::string target = arg["target"].asString();
-
-    auto opts = std::make_shared<igen::IgenOpts>(dom, seed, runner, target);
-    auto igen = std::make_shared<igen::Igen>(opts);
-    igen->init();
-
-    FLOG(INFO, "Opts: dom={}, seed={}, runner={}, target={}", dom, seed, runner, target);
-    for (bool cont = true; cont;) {
-        cont = igen->runOnce();
-    }
-}
+#include "igen/RunAlgo.h"
 
 void initGlog(int argc, char *argv[]) {
     FLAGS_colorlogtostderr = true;
@@ -35,6 +16,7 @@ void initGlog(int argc, char *argv[]) {
     for (int i = 0; i < google::NUM_SEVERITIES; ++i) {
         google::SetLogDestination(i, "app.log");
     }
+    google::SetVLOGLevel("*", 20);
     google::InitGoogleLogging(argv[0]);
 }
 
@@ -57,7 +39,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (opts["iterative"].asBool()) {
-        run_interative(opts);
+        igen::run_interative(opts);
         return 0;
     }
 

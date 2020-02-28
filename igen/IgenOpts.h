@@ -15,11 +15,11 @@ class IgenOpts {
 public:
     IgenOpts(std::string domInp, uint64_t seed, std::string runnerType, std::string target);
 
-    [[nodiscard]] uint64_t getSeed() const;
+    uint64_t getSeed() const;
 
-    [[nodiscard]] const std::string &getRunnerType() const;
+    const std::string &getRunnerType() const;
 
-    [[nodiscard]] const std::string &getTarget() const;
+    const std::string &getTarget() const;
 
 private:
     std::string domInp_;
