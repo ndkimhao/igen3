@@ -11,8 +11,7 @@
 
 namespace igen {
 
-SimpleRunner::SimpleRunner(std::shared_ptr<IgenOpts> opts) {
-    this->opts_ = opts;
+SimpleRunner::SimpleRunner() {
 }
 
 set<loc_t> SimpleRunner::v_execute(const std::vector<std::string> &args) {
@@ -33,7 +32,7 @@ set<loc_t> SimpleRunner::v_execute(const std::vector<std::string> &args) {
     while (getline(ss, line)) {
         if (line.size() && line.back() == '\r')
             line.pop_back();
-        ret.insert(gen_loc_idx(line));
+        ret.insert(cov_->gen_loc_idx(line));
     }
 
     int status = 0;

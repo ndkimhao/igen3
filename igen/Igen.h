@@ -23,8 +23,12 @@ public:
     bool run();
 
 private:
+    str _to_str(vec<VecArgs> configs);
+
+private:
     std::shared_ptr<IgenOpts> opts_;
     std::shared_ptr<Domain> dom_;
+    std::shared_ptr<Coverage> cov_;
 public:
     const std::shared_ptr<Domain> &getDom() const {
         return dom_;

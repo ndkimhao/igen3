@@ -11,7 +11,7 @@ namespace igen {
 
 class SimpleRunner : public Runner {
 public:
-    SimpleRunner(std::shared_ptr<IgenOpts> opts);
+    SimpleRunner();
 
 protected:
     set<loc_t> v_execute(const std::vector<std::string> &args) override;

@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(igen3
         main.cpp
-        runner/Runner.cpp runner/Runner.h igen/Domain.cpp igen/Domain.h igen/IgenOpts.cpp igen/IgenOpts.h runner/SimpleRunner.cpp runner/SimpleRunner.h igen/Igen.cpp igen/Igen.h lib/kcommon/kcommon.h lib/kcommon/rand.cpp igen/RunAlgo.cpp igen/RunAlgo.h lib/kcommon/kvecutil.h lib/kcommon/kprettyprint.h)
+        runner/Runner.cpp runner/Runner.h igen/Domain.cpp igen/Domain.h igen/IgenOpts.cpp igen/IgenOpts.h runner/SimpleRunner.cpp runner/SimpleRunner.h igen/Igen.cpp igen/Igen.h lib/kcommon/kcommon.h lib/kcommon/rand.cpp igen/RunAlgo.cpp igen/RunAlgo.h lib/kcommon/kvecutil.h lib/kcommon/kprettyprint.h igen/Coverage.cpp igen/Coverage.h)
 
 target_include_directories(igen3 PRIVATE /)
 
